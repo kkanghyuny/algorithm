@@ -2,41 +2,52 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-
+import java.util.StringTokenizer;
 
 public class Main {
-	static boolean[] v;
-	static int M;
+	static int n, m;
+	static int[] perm, arr;
+	static boolean[] vis;
 	static StringBuilder sb = new StringBuilder();
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String[] in = br.readLine().split(" ");
-		int N = Integer.parseInt(in[0]);
-		M = Integer.parseInt(in[1]);
-		int[] arr= new int[N];
-		in =  br.readLine().split(" ");
-		for(int i = 0 ; i <N; i++) {
-			arr[i] = Integer.parseInt(in[i]);
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		
+		arr = new int[n];
+		perm = new int[m];
+		vis = new boolean[n];
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i = 0; i < n; i++) {
+			arr[i] = Integer.parseInt(st.nextToken());
 		}
+		
 		Arrays.sort(arr);
-		int[] answer = new int[M];
-		v = new boolean[N];
-		perm(arr,answer,0,0);
+		
+		for(int i = 0; i < n; i++) {
+			perm[0] = arr[i];
+			perm(1, i);
+		}
+		
 		System.out.println(sb);
 	}
 	
-	public static void perm(int[] arr, int[] answer, int cnt, int idx) {
-		if(cnt==M) {
-			for(int i = 0; i < answer.length; i++) {
-				sb.append(answer[i]).append(" ");
+	static void perm(int depth, int idx) {
+		if(depth == m) {
+			for(int i = 0; i < m; i++) {
+				sb.append(perm[i]).append(" ");
 			}
-			sb.append("\n");
+			sb.append('\n');
 			return;
 		}
 		
-		for(int i = idx; i < arr.length; i++) {
-				answer[cnt] = arr[i];
-				perm(arr,answer,cnt+1,i);
+		for(int i = idx; i < n; i++) {
+			
+			perm[depth] = arr[i];
+			perm(depth + 1, i);
 			
 		}
 	}

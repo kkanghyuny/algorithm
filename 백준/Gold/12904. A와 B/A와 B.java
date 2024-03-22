@@ -17,44 +17,20 @@ public class Main {
 		
 		// T
 		String second = br.readLine();
-		sb.append(second);
-		sb.reverse();
 		
-		// T 거꾸로
-		String secondRev = sb.toString();
-		
-		sb.setLength(0);
-		queue.offer(first);
-		
-		while(!queue.isEmpty()) {
-			String now = queue.poll();
-
-			// T, T거꾸로에 포함이 안되어 있다면 이미 가망 X
-			if(!second.contains(now) && !secondRev.contains(now)) {
-				continue;
+		while(first.length() != second.length()) {
+			if(second.charAt(second.length() - 1) == 'A') {
+				second = second.substring(0, second.length() - 1);
+			} else {
+				second = second.substring(0, second.length() - 1);
+				sb.setLength(0);
+				sb.append(second);
+				sb.reverse();
+				second = sb.toString();
 			}
-			
-			if(now.length() == second.length() && now.equals(second)) {
-				answer = true;
-				break;
-			}
-			
-			if(now.length() == second.length()) {
-				continue;
-			}
-			
-			queue.offer(now + "A");
-			// sb 초기화
-			sb.setLength(0);
-			// sb에 now 넣고
-			sb.append(now);
-			// 뒤집기
-			sb.reverse();
-			// 뒤집은거에 B 추가한걸 queue에 추가
-			queue.offer(sb.toString() + "B");
 		}
 		
-		if(answer) {
+		if(first.equals(second)) {
 			System.out.println(1);
 		} else {
 			System.out.println(0);

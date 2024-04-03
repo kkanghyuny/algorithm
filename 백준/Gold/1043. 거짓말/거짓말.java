@@ -54,13 +54,7 @@ public class Main {
 				queue.offer(arr);
 			}
 		}
-		
-		int cnt = 0;
-		while(!queue.isEmpty()) {
-			queue.poll();
-			cnt++;
-		}
-		
-		System.out.println(cnt);
+
+		System.out.println(queue.size());
 	}
 }

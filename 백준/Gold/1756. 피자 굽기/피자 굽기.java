@@ -15,6 +15,11 @@ public class Main {
 		int n = Integer.parseInt(st.nextToken());
 		int answerIdx = 0;
 
+		if (d < n) {
+			System.out.println(0);
+			return;
+		}
+
 		int[] arr = new int[d];
 
 		st = new StringTokenizer(br.readLine());
@@ -29,29 +34,29 @@ public class Main {
 				arr[i] = val;
 			}
 		}
-		
+
 		st = new StringTokenizer(br.readLine());
-		
-		for(int i = 0; i < n; i++) {
+
+		for (int i = 0; i < n; i++) {
 			queue.offer(Integer.parseInt(st.nextToken()));
 		}
-		
+
 		queue.offer(Integer.MAX_VALUE);
-		
+
 		int curr = queue.poll();
-		
-		for(int i = d - 1; i >= 0; i--) {
-			if(curr <= arr[i]) {
+
+		for (int i = d - 1; i >= 0; i--) {
+			if (curr <= arr[i]) {
 				curr = queue.poll();
 				answerIdx = i + 1;
 			}
 		}
-		
-		if(queue.isEmpty()) {
+
+		if (queue.isEmpty()) {
 			System.out.println(answerIdx);
 		} else {
 			System.out.println(0);
 		}
-		
+
 	}
 }

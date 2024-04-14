@@ -1,39 +1,38 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.StringTokenizer;
-import java.util.TreeSet;
 
 public class Main {
-	public static void main(String[] args) throws NumberFormatException, IOException {
+	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
 		StringTokenizer st;
-		
-		TreeSet<String> set = new TreeSet<>();
+		HashSet<String> set = new HashSet<>();
 		
 		int n = Integer.parseInt(br.readLine());
 		
-		for(int i=0; i<n; i++) {
+		for(int i = 0; i < n; i++) {
 			st = new StringTokenizer(br.readLine());
-			String name = st.nextToken();
-			String order = st.nextToken();
+			String who = st.nextToken();
+			String ent = st.nextToken();
 			
-			if(order.equals("enter")) {
-				set.add(name);
-			} else if(order.equals("leave")) {
-				set.remove(name);
+			switch(ent) {
+			case "enter": set.add(who); break;
+			case "leave": if(set.contains(who)) set.remove(who); break;
 			}
 		}
 		
-		StringBuilder sb = new StringBuilder();
-		while(!set.isEmpty()) {
-			sb.append(set.pollLast()).append('\n');
+		String[] arr = set.toArray(new String[0]);
+		
+		Arrays.sort(arr);
+		
+		for(int i = arr.length - 1; i >= 0; i--) {
+			sb.append(arr[i]).append('\n');
 		}
 		
 		System.out.println(sb);
-		
-		
-		
 	}
-
 }

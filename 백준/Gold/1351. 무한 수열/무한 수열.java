@@ -25,8 +25,8 @@ public class Main {
 	static long dp(long val) {
 		if(map.containsKey(val)) return map.get(val);
 		
-		long a = (long)Math.floor(val / p);
-		long b = (long)Math.floor(val / q);
+		long a = (long)val / p;
+		long b = (long)val / q;
 		
 		map.put(val, dp(a) + dp(b));
 		return map.get(val);

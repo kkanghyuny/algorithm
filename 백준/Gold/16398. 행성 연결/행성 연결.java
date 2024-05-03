@@ -5,6 +5,22 @@ import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Main {
+	static class Edge implements Comparable<Edge>{
+		int u;
+		int v;
+		int w;
+		
+		public Edge(int u, int v, int w) {
+			this.u = u;
+			this.v = v;
+			this.w = w;
+		}
+		
+		@Override
+		public int compareTo(Edge o) {
+			return this.w - o.w;
+		}
+	}
 	static int[] group;
 	
 	public static void main(String[] args) throws IOException{
@@ -27,11 +43,11 @@ public class Main {
 			}
 		}
 		
-		PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[2] - b[2]);
+		PriorityQueue<Edge> pq = new PriorityQueue<>();
 		
 		for(int i = 0; i < n; i++) {
 			for(int j = i + 1; j < n; j++) {
-				pq.offer(new int[] {i, j, arr[i][j]});
+				pq.offer(new Edge(i, j, arr[i][j]));
 			}
 		}
 		
@@ -39,15 +55,15 @@ public class Main {
 		long ans = 0;
 		
 		while(!pq.isEmpty() && pick < n - 1) {
-			int[] curr = pq.poll();
+			Edge curr = pq.poll();
 			
-			int find1 = find(curr[0]);
-			int find2 = find(curr[1]);
+			int find1 = find(curr.u);
+			int find2 = find(curr.v);
 			
 			if(find1 != find2) {
 				union(find1, find2);
 				pick++;
-				ans += curr[2];
+				ans += curr.w;
 			}
 		}
 		

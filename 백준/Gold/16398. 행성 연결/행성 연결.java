@@ -57,7 +57,7 @@ public class Main {
 	
 	static int find(int n) {
 		if(group[n] == n) return n;
-		return find(group[n]);
+		return group[n] = find(group[n]);
 	}
 	
 	static void union(int a, int b) {

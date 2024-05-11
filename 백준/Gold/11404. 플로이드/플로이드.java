@@ -18,8 +18,12 @@ public class Main {
 		
 		for(int i = 0; i < n; i++) {
 			for(int j = 0; j < n; j++) {
-				if(i != j) arr[i][j] = inf;
+				arr[i][j] = inf;
 			}
+		}
+		
+		for(int i = 0; i < n; i++) {
+			arr[i][i] = 0;
 		}
 		
 		for(int i = 0; i < m; i++) {

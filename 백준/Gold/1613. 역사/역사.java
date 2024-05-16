@@ -24,8 +24,8 @@ public class Main {
 			int a = Integer.parseInt(st.nextToken());
 			int b = Integer.parseInt(st.nextToken());
 			
-			arr[a][b] = 1;
-			arr[b][a] = -1;
+			arr[a][b] = -1;
+			arr[b][a] = 1;
 		}
 		
 		for(int i = 1; i <= n; i++) {
@@ -39,7 +39,7 @@ public class Main {
 			st = new StringTokenizer(br.readLine());
 			int a = Integer.parseInt(st.nextToken());
 			int b = Integer.parseInt(st.nextToken());
-			sb.append(ans[b][a]).append('\n');
+			sb.append(ans[a][b]).append('\n');
 		}
 		
 		System.out.println(sb);

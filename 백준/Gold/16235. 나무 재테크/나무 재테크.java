@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
-import java.util.PriorityQueue;
+import java.util.Deque;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -19,7 +19,7 @@ public class Main {
 		int[][] arr = new int[n + 1][n + 1];
 		int[][] death = new int[n + 1][n + 1];
 		int[][] breed = new int[n + 1][n + 1];
-		PriorityQueue<Integer>[][] tree = new PriorityQueue[n + 1][n + 1];
+		Deque<Integer>[][] tree = new ArrayDeque[n + 1][n + 1];
 		Queue<Integer> queue = new ArrayDeque<>();
 		
 		for(int i = 1; i <= n; i++) {
@@ -27,7 +27,7 @@ public class Main {
 			for(int j = 1; j <= n; j++) {
 				A[i][j] = Integer.parseInt(st.nextToken());
 				arr[i][j] = 5;
-				tree[i][j] = new PriorityQueue<>();
+				tree[i][j] = new ArrayDeque<>();
 			}
 		}
 		
@@ -48,7 +48,7 @@ public class Main {
 					int size = tree[i][j].size();
 					
 					while(size-- > 0) {
-						int age = tree[i][j].poll();
+						int age = tree[i][j].pollFirst();
 						if(age <= arr[i][j]) {
 							arr[i][j] -= age++;
 							queue.offer(age);
@@ -59,7 +59,7 @@ public class Main {
 					
 					while(!queue.isEmpty()) {
 						int poll = queue.poll();
-						tree[i][j].offer(poll);
+						tree[i][j].offerLast(poll);
 						
 						// 번식하는 나무 몇개인지 카운트
 						if(poll % 5 == 0) {
@@ -84,7 +84,7 @@ public class Main {
 								if(r < 1 || r > n || c < 1 || c > n) continue;
 								if(r == i && c == j) continue;
 								
-								tree[r][c].offer(1);
+								tree[r][c].offerFirst(1);
 							}
 						}
 					}

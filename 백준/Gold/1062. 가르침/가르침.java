@@ -41,9 +41,7 @@ public class Main {
 			arr[i] = arr[i].replace("tica", "");
 		}
 
-		for (int i = 0; i < 26; i++) {
-			backtracking(i, 0);
-		}
+		backtracking(0, 0);
 
 		System.out.println(answer);
 	}

@@ -12,19 +12,14 @@ public class Main {
 			arr[i] = Integer.parseInt(st.nextToken());
 		}
 
-		Map<Integer, Integer> map = new HashMap<>();
+		int[] cntArr = new int[1_000_001];
 		int answer = 0;
 		for(int i = 0; i < n; i++) {
-			if(map.containsKey(arr[i])) {
-				int cnt = map.get(arr[i]);
-				if(cnt == 1) {
-					map.remove(arr[i]);
-				} else {
-					map.put(arr[i], cnt - 1);
-				}
-				map.put(arr[i] - 1, map.getOrDefault(arr[i] - 1, 0) + 1);
+			if(cntArr[arr[i]] != 0) {
+				cntArr[arr[i]]--;
+				cntArr[arr[i] - 1]++;
 			} else {
-				map.put(arr[i] - 1, map.getOrDefault(arr[i] - 1, 0) + 1);
+				cntArr[arr[i] - 1]++;
 				answer++;
 			}
 		}

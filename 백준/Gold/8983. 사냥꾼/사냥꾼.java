@@ -18,30 +18,25 @@ public class Main {
 		}
 		Arrays.sort(shotFrom);
 
-		PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
 		for(int i = 0; i < n; i++) {
 			st = new StringTokenizer(br.readLine());
-			pq.offer(new int[] {Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())});
-		}
+			int r = Integer.parseInt(st.nextToken());
+			int c = Integer.parseInt(st.nextToken());
 
-		int idx = 0;
-		while(idx < m && !pq.isEmpty()) {
-			int[] curr = pq.poll();
-			int r = curr[0];
-			int c = curr[1];
-			int now = shotFrom[idx];
+			if(c > l) continue;
 
-			if(Math.abs(now - r) + c <= l) {
-				answer++;
-				continue;
+			int left = 0;
+			int right = m - 1;
+
+			while(left < right) {
+				int mid = (left + right) / 2;
+				if(shotFrom[mid] < r) left = mid + 1;
+				else right = mid;
 			}
 
-			if(now < r) {
-				now = shotFrom[++idx];
-				if(Math.abs(now - r) + c <= l) {
-					answer++;
-				}
-			}
+			int hunter = shotFrom[left];
+			if(Math.abs(hunter - r) + c <= l) answer++;
+			else if (left > 0 && Math.abs(shotFrom[left - 1] - r) + c <= l) answer++;
 		}
 		System.out.println(answer);
 	}

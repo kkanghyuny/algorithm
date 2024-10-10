@@ -13,6 +13,7 @@ class Solution {
     
     public String solution(int n, int m, int x, int y, int r, int c, int k) {
         if(Math.abs(Math.abs(x - r) + Math.abs(y - c) - k) % 2 != 0) return "impossible";
+        if(Math.abs(Math.abs(x - r) + Math.abs(y - c)) > k) return "impossible";
         row = n;
         col = m;
         endR = r - 1;

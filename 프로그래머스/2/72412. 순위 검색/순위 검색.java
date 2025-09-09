@@ -56,16 +56,10 @@ class Solution {
         }
         
         for(int i = 0; i < t; i++) {
-            st = new StringTokenizer(query[i]);
-            String s1 = st.nextToken();
-            st.nextToken();
-            String s2 = st.nextToken();
-            st.nextToken();
-            String s3 = st.nextToken();
-            st.nextToken();
-            String s4 = st.nextToken();
-            int score = Integer.parseInt(st.nextToken());
-            answer[i] = arr[map.get(s1)][map.get(s2)][map.get(s3)][map.get(s4)][score];
+            String[] parts = query[i].split(" and ");
+            String[] lastPart = parts[3].split(" ");
+            int score = Integer.parseInt(lastPart[1]);
+            answer[i] = arr[map.get(parts[0])][map.get(parts[1])][map.get(parts[2])][map.get(lastPart[0])][score];
         }
         
         return answer;
